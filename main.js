@@ -47,4 +47,4 @@ document.addEventListener("DOMContentLoaded", function () {
         nameInput.value = "";
         commentInput.value = "";
     });
-});
+}); 
