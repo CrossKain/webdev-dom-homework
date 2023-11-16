@@ -1,6 +1,8 @@
+import { format } from "date-fns";
 import { saveUserInLocalStorage } from "./helpers.js";
 import { autoInfo, commentsArray, getToken, setComments, userLogin } from "./main.js";
 import { renderComments } from "./render.js";
+
 
 export const fetchArray = () => {
 
@@ -19,6 +21,8 @@ export const fetchArray = () => {
 
         let newComments = responseData.comments.map((element) => {
             const newDate = new Date(element.date);
+            const dateFormat = format(newDate, 'yyyy-MM-dd hh.mm.ss')
+            console.log(dateFormat)
             return {
                 comment: element.text,
                 name: element.author.name,
@@ -35,7 +39,7 @@ export const fetchArray = () => {
 
         )
         setComments(newComments)
-        
+
 
         renderComments(commentsArray);
     }).catch((Error) => {
@@ -53,7 +57,7 @@ export const arrayPost = () => {
     const nameElement = document.getElementById("inputName");
     const textElement = document.getElementById("inputText");
     const buttonElement = document.getElementById("buttonPush");
-    
+
 
 
 
@@ -79,7 +83,7 @@ export const arrayPost = () => {
     }).then((thenresponse) => {
         if (thenresponse.status === 500) {
             arrayPost();
-            
+
         } else if (thenresponse.status === 400) {
             throw new Error("Имя или текст комментария должны иметь 3 и более символов");
         }
@@ -104,7 +108,7 @@ export const arrayPost = () => {
 
 
             setTimeout(function () {
-            
+
 
             }, 1000);
 
